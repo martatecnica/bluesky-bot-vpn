@@ -12,9 +12,9 @@ Environment Variables (GitHub Secrets):
   CTA_LINK          -> https://bit.ly/protegetumovil
 */
 
-import { BskyAgent } from '@atproto/api'
+const { BskyAgent } = require('@atproto/api')
 
-// Lista de frases rotativas:
+// Frases rotativas:
 const PHRASES = [
   `LaLiga activaba tu micro sin permiso. Yo ya bloqueo todo 👉 ${process.env.CTA_LINK}`,
   `Tebas te espía con tu propio móvil 😱 Protege tu privacidad aquí 👉 ${process.env.CTA_LINK}`,
@@ -25,18 +25,17 @@ const PHRASES = [
 
 async function run() {
   const agent = new BskyAgent({ service: process.env.BSKY_SERVER })
-  // Login
-  await agent.login({ identifier: process.env.BSKY_HANDLE, password: process.env.BSKY_PASSWORD })
 
-  // Selecciona frase aleatoria
+  await agent.login({
+    identifier: process.env.BSKY_HANDLE,
+    password: process.env.BSKY_PASSWORD
+  })
+
   const phrase = PHRASES[Math.floor(Math.random() * PHRASES.length)]
 
-  // Postea solo texto
-  await agent.post({
-    text: phrase
-  })
+  await agent.post({ text: phrase })
 
   console.log('Post enviado:', phrase)
 }
 
-run().catch(err => console.error(err))
+run().catch(console.error)
