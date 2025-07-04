@@ -14,7 +14,6 @@ Environment Variables (GitHub Secrets):
 
 const { BskyAgent } = require('@atproto/api')
 
-// Frases rotativas:
 const PHRASES = [
   `LaLiga activaba tu micro sin permiso. Yo ya bloqueo todo 👉 ${process.env.CTA_LINK}`,
   `Tebas te espía con tu propio móvil 😱 Protege tu privacidad aquí 👉 ${process.env.CTA_LINK}`,
